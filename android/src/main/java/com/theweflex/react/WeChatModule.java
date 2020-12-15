@@ -855,13 +855,14 @@ public class WeChatModule extends ReactContextBaseJavaModule implements IWXAPIEv
         if (baseReq.getType() == ConstantsAPI.COMMAND_SHOWMESSAGE_FROM_WX) {
             ShowMessageFromWX.Req req = (ShowMessageFromWX.Req) baseReq;
             // 对应JsApi navigateBackApplication中的extraData字段数据
-            map.putString("type", "SendMessageToWX.Resp");
+            map.putString("type", "ShowMessageFromWX.Req");
             map.putString("lang", req.lang);
-            map.putString("country", req.message.messageExt);
+            map.putString("country", req.country);
+            map.putString("extMsg", req.message.messageExt);
         }
         this.getReactApplicationContext()
                 .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-                .emit("WeChat_Resp", map);
+                .emit("WeChat_Req", map);
     }
 
     @Override
